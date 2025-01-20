@@ -1,0 +1,17 @@
+{
+    "name": "jeanc/l5-teste",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "JeanCSF",
+            "email": "jean.csf.17@gmail.com"
+        }
+    ],
+    "require": {
+        "league/plates": "^3.5"
+    }
+}

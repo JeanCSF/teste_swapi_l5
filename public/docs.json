@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Star Wars API",
+    "version": "1.0.0",
+    "description": "API para obter dados sobre filmes da franquia Star Wars"
+  },
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "summary": "Obter lista de filmes",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "date_asc",
+                "date_desc",
+                "ep_asc",
+                "ep_desc",
+                "title"
+              ],
+              "default": "date_asc"
+            },
+            "description": "Parâmetro para ordenar os filmes"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pt",
+                "en"
+              ],
+              "default": "en"
+            },
+            "description": "Parâmetro para definir a lingua de tradução"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de filmes obtida com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Filmes obtidos com sucesso."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "episode_id": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "release_date": {
+                            "type": "string"
+                          },
+                          "film_id": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao obter os filmes"
+          }
+        }
+      }
+    },
+    "/movies/{filmId}": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "summary": "Obter detalhes de um filme",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "required": true,
+            "description": "ID do filme",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pt",
+                "en"
+              ],
+              "default": "en"
+            },
+            "description": "Parâmetro para definir a lingua de tradução"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do filme obtidos com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Filme ID: 1 obtido com sucesso."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "episode_id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "release_date": {
+                          "type": "string"
+                        },
+                        "film_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Filme não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Filme não encontrado."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao obter os dados do filme"
+          }
+        }
+      }
+    },
+    "/translations": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "summary": "Obter traduções",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "en",
+              "description": "Código do idioma para as traduções. Exemplo: 'en', 'pt', etc."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduções obtidas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Traduções obtidas com sucesso."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "not_found": {
+                          "type": "string",
+                          "example": "Not Found"
+                        },
+                        "not_found_desc": {
+                          "type": "string",
+                          "example": "The resource you are looking for does not exist."
+                        },
+                        "back_home": {
+                          "type": "string",
+                          "example": "Back to Home"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao obter as traduções"
+          }
+        }
+      }
+    }
+  }
+}
