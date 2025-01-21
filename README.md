@@ -35,9 +35,35 @@ Para clonar o repositório, você pode utilizar o seguinte comando no terminal:
 2. **Filtros e Ordenação**: A aplicação oferece a possibilidade de filtrar filmes com base em diversos critérios, como `title`, `date_asc`, `date_desc`, `ep_asc`, e `ep_desc`.
 3. **Pesquisa por Filmes**: A aplicação oferece a possibilidade de pesquisar filmes pelo titulo deles.
 4. **Páginas de erro especificas**: A aplicação possui duas páginas de erro, uma para erros 404 e outra para erros 500.
-5. **Documentação**: A aplicação possui uma rota `/docs` que exibe a documentação da API.
+5. **Documentação**: A aplicação possui uma rota `/docs` que exibe uma documentação interativa da API.
 
-### 4. Descrição do Teste
+## 4. Endpoints da API
+
+### **GET /movies**
+- **Descrição**: Retorna o catálogo de filmes.
+- **Parâmetros opcionais**:
+  - `lang` (string): Define o idioma dos dados retornados. Se não especificado, o idioma padrão será utilizado.
+  - `sort` (string): Define a ordenação do catálogo. Pode ser `title`, `date_asc`, `date_desc`, `ep_asc`, e `ep_desc`, caso não seja especificado, o catálogo será ordenado por `date_asc` (data de lançamento ascendente).
+- **Exemplo de uso**: `GET /movies?lang=en&sort=title`
+
+### **GET /movies/{id}**
+- **Descrição**: Retorna os detalhes de um filme específico, incluindo nome, número do episódio, sinopse, entre outros.
+- **Parâmetro de rota**:
+- `id` (string): Identificador único do filme.
+- **Parâmetro opcional**:
+- `lang` (string): Define o idioma dos dados retornados. Se não especificado, o idioma padrão será utilizado.
+- **Exemplo de uso**: `GET /movies/1?lang=en`
+
+### **GET /translations**
+- **Descrição**: Retorna as traduções disponíveis para o frontend.
+- **Parâmetro opcional**:
+- `lang` (string): Define o idioma dos dados retornados. Se não especificado, o idioma padrão será utilizado.
+- **Exemplo de uso**: `GET /translations?lang=pt`
+
+### Observações
+- O parâmetro `lang` é opcional para todos os endpoints. Caso ele não seja informado, os dados serão retornados no idioma padrão configurado na API.
+
+### 5. Descrição do Teste
 
 Utilizando a api do Star Wars como fonte de informação, construa uma tela web com um catálogo, contendo todos os filmes, ordenados por data de lançamento, exibindo nome e data de lançamento de cada um.✔
 

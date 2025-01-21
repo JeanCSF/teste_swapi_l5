@@ -1,4 +1,5 @@
 {
+    "search": "Search...",
     "not_found": "Page not found",
     "not_found_desc": "Sorry, the page you requested don't exist or has been moved.",
     "server_error": "Internal Server Error",

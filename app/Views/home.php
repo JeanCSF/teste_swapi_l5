@@ -16,7 +16,7 @@ $translator = new Translator($_SESSION['language'] ?? 'en');
                 type="text"
                 id="searchInput"
                 class="form-control"
-                placeholder="Search..."
+                placeholder="<?= $translator->translate('search') ?>"
                 oninput="filterMovies()">
         </div>
         <div>
